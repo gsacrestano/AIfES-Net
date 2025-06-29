@@ -315,8 +315,6 @@
 
 void setup() {
   Serial.begin(115200);
-  while (!Serial)
-    ;
   uint32_t i;
 
   // ---------------------------------- Layer definition ---------------------------------------+
@@ -456,14 +454,6 @@ void setup() {
   output_tensor = AITENSOR_2D_F32(output_shape, output_data);
   aialgo_inference_model(&model, &input_tensor, &output_tensor);
 
-  /*
-  Serial.println(F("\n+++ Training data +++"));
-  Serial.print(F("Predicted values:\n"));
-  print_aitensor(&output_tensor);
-  Serial.print(F("Target values:\n"));
-  print_aitensor(&target_tensor);
-  */
-
   Serial.println("");
   Serial.print("y_train = [");
   Serial.print(trainY[0]);
@@ -485,15 +475,6 @@ void setup() {
   output_shape[0] = TEST_DATASET;
   output_tensor = AITENSOR_2D_F32(output_shape, output_data);
   aialgo_inference_model(&model, &test_input_tensor, &output_tensor);
-
-
-  /*
-  Serial.println(F("\n+++ Test data +++"));
-  Serial.print(F("Predicted values:\n"));
-  print_aitensor(&output_tensor);
-  Serial.print(F("Target values:\n"));
-  print_aitensor(&test_target_tensor);
-  */
 
   Serial.println("");
   Serial.print("y_test = [");
